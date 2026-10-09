@@ -1,10 +1,12 @@
-# Sample WebGPU
+# Generate image 3D modelling using WebGPU in Jetpack Compose
 
-An Android (Jetpack Compose) sample app that turns a flat image into a lit, 3D-looking relief using [`androidx.webgpu`](https://developer.android.com/jetpack/androidx/releases/webgpu) — Android's native WebGPU/Dawn bindings.
+An Android (Jetpack Compose) sample app that turns a flat image into a lit, 3D looking relief using [`androidx.webgpu`](https://developer.android.com/jetpack/androidx/releases/webgpu) Android's native WebGPU/Dawn bindings.
+
+Experience the app [here](https://github.com/mikkelofficial7/android-webgpu-sample/raw/refs/heads/main/app-release.apk)
 
 Pick an image, generate a relief-shaded "3D model" from it on the GPU, spin it with a slider, and optionally drop a shadow beneath it.
 
-<p align="center">
+<p align="left">
   <img src="1.png" width="300" alt="App screenshot" />
 </p>
 
@@ -37,14 +39,18 @@ app/src/main/java/com/jetpack/compose/sample_webgpu/
 ```
 
 ## Requirements
-
 - Android Studio (Narwhal or newer recommended)
-- JDK 11
 - A device or emulator running **Android 8.0 (API 26)+**
 - A Vulkan-capable GPU/driver is strongly recommended. On adapters without real alpha-compositing support (e.g. the SwiftShader software adapter some emulators fall back to), the renderer still runs but the background may stay opaque instead of transparent, since the surface's supported `CompositeAlphaMode`s are queried and the best available one is used automatically.
 
-## Building & running
+## Dependency
+```
+dependencies {
+    implementation "androidx.webgpu:webgpu:1.0.0-alpha06"
+}
+```
 
+## Building & running
 ```bash
 ./gradlew :app:assembleDebug
 ```
@@ -52,8 +58,10 @@ app/src/main/java/com/jetpack/compose/sample_webgpu/
 Or open the project in Android Studio and run the `app` configuration on a connected device/emulator.
 
 ## Tech stack
-
 - [Jetpack Compose](https://developer.android.com/jetpack/compose) (Material 3)
 - [`androidx.webgpu`](https://developer.android.com/jetpack/androidx/releases/webgpu) (Dawn-backed WebGPU bindings)
 - [Coil](https://coil-kt.github.io/coil/) for async image loading
 - Kotlin Coroutines
+
+## Reference
+[Getting started with WebGPU](https://developer.android.com/develop/ui/views/graphics/webgpu/getting-started?hl=id)
