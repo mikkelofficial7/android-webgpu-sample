@@ -20,9 +20,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -199,25 +197,7 @@ fun WebImageUploader() {
                         contentAlignment = Alignment.Center
                     ) {
                         if (showObjectShadow) {
-                            val shadowWidthScale = 0.35f +
-                                0.65f * abs(cos(Math.toRadians(rotationAngle.toDouble()))).toFloat()
-
-                            Image(
-                                bitmap = bitmap.asImageBitmap(),
-                                contentDescription = null,
-                                contentScale = ContentScale.Fit,
-                                colorFilter = ColorFilter.tint(OBJECT_SHADOW_COLOR),
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .graphicsLayer {
-                                        rotationX = 45f
-                                        clip = true
-                                        scaleX = shadowWidthScale
-                                        scaleY = 0.4f
-                                        alpha = 0.45f
-                                        translationY = size.height * 0.3f
-                                    }
-                            )
+                            ObjectShadow(bitmap, rotationAngle)
                         }
 
                         Rotating360Image(
@@ -271,4 +251,27 @@ fun Rotating360Image(
     ) {
         content()
     }
+}
+
+@Composable
+fun ObjectShadow(bitmap: Bitmap, rotationAngle: Float) {
+    val shadowWidthScale = 0.35f +
+            0.65f * abs(cos(Math.toRadians(rotationAngle.toDouble()))).toFloat()
+
+    Image(
+        bitmap = bitmap.asImageBitmap(),
+        contentDescription = null,
+        contentScale = ContentScale.Fit,
+        colorFilter = ColorFilter.tint(OBJECT_SHADOW_COLOR),
+        modifier = Modifier
+            .fillMaxSize()
+            .graphicsLayer {
+                rotationX = 45f
+                clip = true
+                scaleX = shadowWidthScale
+                scaleY = 0.4f
+                alpha = 0.45f
+                translationY = size.height * 0.3f
+            }
+    )
 }

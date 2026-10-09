@@ -56,7 +56,6 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class WebGpuRenderer {
-
     private val BG_COLOR = "#00000000"
     private lateinit var webGpu: WebGpu
     private lateinit var renderPipeline: GPURenderPipeline
